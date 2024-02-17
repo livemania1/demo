@@ -1,1 +1,60 @@
-\
+\<!DOCTYPE html>
+<html>
+<head>
+  <script language="javascript">
+
+// alert('Join Our Telegram For Latest update')
+         if (confirm("Join Our Telegram Channel @cricket_Mania_24 For Latest Update") == true) {
+         window.open("https://telegram.me/cricket_Mania_24/", '_blank');
+     }
+</script>'));
+    <link rel="stylesheet" href="https://cdn.plyr.io/3.7.2/plyr.css" />
+</head>
+<body>
+    <div id="player-container">
+        <video preload="none" id="player" autoplay controls crossorigin></video>
+    </div>
+    <script src="https://cdn.plyr.io/3.7.2/plyr.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
+       <div data-plyr-player-container="" style="width: 100%; height: 100%" class="plyr-mobile plyr-video-container" plyr-controls="true">
+            <video poster="" autoplay="" data-plyr-player="" id="video" style="width:100%;height:100%;" class="plyr-video" src="blob:https://tnt1-criccoder.vercel.app/f4ee7a76-3283-4a88-99db-a839c2081e21"></video>
+        <canvas class="plyr-canvas-container"></canvas><div class="plyr-controls-container" shown="true"><div class="plyr-scrim-container"></div><div class="plyr-hidden-fast-forward-container"><div class="plyr-fast-foward-container"><span>0s</span><span class="plyr-forward-rewind-container-icon">fast_forward</span></div></div><div class="plyr-hidden-rewind-container"><div class="plyr-rewind-container"><span>0s</span><span class="plyr-forward-rewind-container-icon">fast_rewind</span></div></div><div class="plyr-server-side-ad-container"></div><div class="plyr-bottom-controls plyr-no-propagation"><div class="plyr-ad-controls plyr-hidden"><div class="plyr-ad-position plyr-hidden"><span class="plyr-ad-position-span"></span></div><div class="plyr-ad-counter"><span class="plyr-ad-counter-span"></span></div></div><div class="plyr-no-propagation plyr-show-controls-on-mouse-over plyr-settings-menu plyr-hidden plyr-resolutions"><button type="button" class="plyr-back-to-overflow-button" aria-label="Resolution"><i class="material-icons-round">arrow_back</i><span>Resolution</span></button><button type="button" class="explicit-resolution"><span>1080p</span></button><button type="button" class="explicit-resolution"><span>720p</span></button><button type="button" class="explicit-resolution"><span>576p</span></button><button type="button" class="explicit-resolution"><span>432p</span></button><button type="button" class="explicit-resolution"><span>288p</span></button><button type="button" class="explicit-resolution"><span>144p</span></button><button type="button" class="plyr-enable-abr-button" aria-selected="true"><span class="plyr-auto-span plyr-chosen-item">Auto</span><i class="material-icons-round plyr-chosen-item" aria-hidden="true">done</i></button></div><div class="plyr-no-propagation plyr-show-controls-on-mouse-over plyr-settings-menu plyr-hidden plyr-audio-languages"><button type="button" class="plyr-back-to-overflow-button" aria-label="Back"><i class="material-icons-round">arrow_back</i><span>Language</span></button><button type="button" aria-selected="true"><span class="plyr-chosen-item">English</span><i class="material-icons-round plyr-chosen-item" aria-hidden="true">done</i></button></div><div class="plyr-no-propagation plyr-show-controls-on-mouse-over plyr-settings-menu plyr-hidden plyr-playback-rates"><button type="button" class="plyr-back-to-overflow-button" aria-label="Back"><i class="material-icons-round">arrow_back</i><span>Playback speed</span></button><button type="button"><span>0.5x</span></button><button type="button"><span>0.75x</span></button><button type="button"><span>1x</span></button><button type="button"><span>1.25x</span></button><button type="button"><span>1.5x</span></button><button type="button"><span>1.75x</span></button><button type="button"><span>2x</span></button></div></div><div class="plyr-client-side-ad-container plyr-hidden"></div><div class="plyr-spinner-container plyr-hidden"><div class="plyr-spinner"><svg class="plyr-spinner-svg" viewBox="0 0 30 30"><circle class="plyr-spinner-path" cx="15" cy="15" r="14.5" fill="none" stroke-width="1" stroke-miterlimit="10"></circle></svg></div></div><div class="plyr-text-container" style="text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: flex-end;"></div></div>
+    </center>
+      
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const video = document.querySelector("video");
+            const source = 'https://cdn-tv.co.in/myweb/watch.php?id=1000009276&e=.m3u8';
+            const defaultOptions = {};
+            if (Hls.isSupported()) {
+                const hls = new Hls();
+                hls.loadSource(source);
+                hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+                    const availableQualities = hls.levels.map((l) => l.height)
+                    defaultOptions.quality = {
+                        default: availableQualities[0],
+                        options: availableQualities,
+                        forced: true,
+                        onChange: (e) => updateQuality(e),
+                    }
+
+                    const player = new Plyr(video, defaultOptions);
+                });
+                hls.attachMedia(video);
+                window.hls = hls;
+            } else {
+                const player = new Plyr(video, defaultOptions);
+            }
+
+            function updateQuality(newQuality) {
+                window.hls.levels.forEach((level, levelIndex) => {
+                    if (level.height === newQuality) {
+                        console.log("Found quality match with " + newQuality);
+                        window.hls.currentLevel = levelIndex;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
