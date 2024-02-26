@@ -1,50 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            background-color: black;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
 
-    <!-- SEO-->
-    <meta name="author" content="foot stream" />
-    <meta name="designer" content=" " />
-    <meta name="description" content="">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <link rel="stylesheet" href="https://cdn.plyr.io/3.6.2/plyr.css" />
-     <link rel="stylesheet" href="/dist/wmlogo.css" />
-    <script src="https://kit.fontawesome.com/bf2610f0a2.js" crossorigin="anonymous"></script>
-    <!-- Halfmoon CSS -->
-    <link href="https://cdn.jsdelivr.net/gh/halfmoonui/halfmoon@1.0.4/css/halfmoon.min.css" rel="stylesheet" />
-    <title>Live</title>
+        .iframe-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: -10vh; /* adjust the height as needed */
+        }
 
-<script>
-document.addEventListener("DOMContentLoaded",()=> {
-  const e = document.querySelector("video"),
-    n = e.getElementsByTagName("source")[0].src,
-    o = {};
-  if(Hls.isSupported()) {
-    var config = {
-      maxMaxBufferLength: 100,
-    };
-    const t = new Hls(config);
-    t.loadSource(n), t.on(Hls.Events.MANIFEST_PARSED, function(n, l) {
-      const s = t.levels.map(e => e.height);
-      o.quality = {
-        default: s[0]
-        options: s,
-        forced: !0,
-        onChange: e => (function(e) {
-          window.hls.levels.forEach((n, o) => {
-            n.height === e && (window.hls.currentLevel = o)
-          })
-        })(e)
-      };
-      new Plyr(e, o)
-    }), t.attachMedia(e), window.hls = t
-  } else {
-    new Plyr(e, o)
-  }
-});
-</script>
-<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-<script src="https://cdn.plyr.io/3.6.2/plyr.polyfilled.js"></script>
-</head>
-<body class="dark-mode with-custom-scrollbars with-custom-css-scrollbars">
-   
-<video id="player" controls preload="metadata" poster=" " class="plyr">
-<source src="https://voodc.com/embed/858a918fa18d8b95879983849a8a98878492.html" type="application/x-mpegURL"/>
-</video>
+        #video {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>https://voodc.com/embed/858a918fa18d8b95879983849a8a98878492.html
+<body>
+    <div class="iframe-container">
+      <iframe allow="encrypted-media" allowfullscreen="yes" frameborder="0" width="960" height="560" id="streamIframe" marginheight="0" marginwidth="0" name="streamframe" scrolling="no" src="https://voodc.com/embed/858a918fa18d8b95879983849a8a98878492.html" height="510" width="1000"></iframe>       
+    </div>
+</body>
+</html>
