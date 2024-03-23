@@ -1,67 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,maximum-scale=1.0 , user-scalable=no">
+    <meta name="viewport" content="width=device-width" />
+    <!-- SEO-->
+    <meta name="author" content="foot stream" />
+    <meta name="designer" content=" " />
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <link rel="stylesheet" href="https://cdn.plyr.io/3.7.2/plyr.css" />
-    <script>
-        function requestFullScreen() {
-            var elem = document.documentElement;
-            if (elem.requestFullscreen) {
-                elem.requestFullscreen();
-            }
-            else if (elem.webkitRequestFullscreen) {
-                elem.webkitRequestFullscreen();
-            }
-            else if (elem.msRequestFullscreen) {
-                elem.msRequestFullscreen();
-            }
-        }
+     <link rel="stylesheet" href="/dist/wmlogo.css" />
+    <script src="https://kit.fontawesome.com/bf2610f0a2.js" crossorigin="anonymous"></script>
+    <!-- Halfmoon CSS -->
+    <link href="https://cdn.jsdelivr.net/gh/halfmoonui/halfmoon@1.0.4/css/halfmoon.min.css" rel="stylesheet" />
+    <title>Live</title>
 
-        window.onload = function() {
-            requestFullScreen();
-        };
-    </script>
+<script>
+document.addEventListener("DOMContentLoaded",()=> {
+  const e = document.querySelector("video"),
+    n = e.getElementsByTagName("source")[0].src,
+    o = {};
+  if(Hls.isSupported()) {
+    var config = {
+      maxMaxBufferLength: 100,
+    };
+    const t = new Hls(config);
+    t.loadSource(n), t.on(Hls.Events.MANIFEST_PARSED, function(n, l) {
+      const s = t.levels.map(e => e.height);
+      o.quality = {
+        default: s[0]
+        options: s,
+        forced: !0,
+        onChange: e => (function(e) {
+          window.hls.levels.forEach((n, o) => {
+            n.height === e && (window.hls.currentLevel = o)
+          })
+        })(e)
+      };
+      new Plyr(e, o)
+    }), t.attachMedia(e), window.hls = t
+  } else {
+    new Plyr(e, o)
+  }
+});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
+<script src="https://cdn.plyr.io/3.7.2/plyr.js"></script>
 </head>
-<body>
-  <div id="player-container">
-        <video preload="none" id="player" autoplay controls crossorigin></video>
-    </div>
-    <script src="https://cdn.plyr.io/3.7.2/plyr.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/hls.js@1"></script>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const video = document.querySelector("video");
-            const source = 'https://partneta.cdn.mgmlcdn.com/omsport/smil:omsport.stream.smil/chunklist.m3u8';
-            const defaultOptions = {};
-            if (Hls.isSupported()) {
-                const hls = new Hls();
-                hls.loadSource(source);
-                hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
-                    const availableQualities = hls.levels.map((l) => l.height)
-                    defaultOptions.quality = {
-                        default: availableQualities[0],
-                        options: availableQualities,
-                        forced: true,
-                        onChange: (e) => updateQuality(e),
-                    }
-
-                    const player = new Plyr(video, defaultOptions);
-                });
-                hls.attachMedia(video);
-                window.hls = hls;
-            } else {
-                const player = new Plyr(video, defaultOptions);
-            }
-
-            function updateQuality(newQuality) {
-                window.hls.levels.forEach((level, levelIndex) => {
-                    if (level.height === newQuality) {
-                        console.log("Found quality match with " + newQuality);
-                        window.hls.currentLevel = levelIndex;
-                    }
-                });
-            }
-        });
-    </script>
-</body>
-</html>
+<body class="dark-mode with-custom-scrollbars with-custom-css-scrollbars">
+   
+<video id="player" controls preload="metadata" poster=" " class="plyr">
+<source src="https://partneta.cdn.mgmlcdn.com/omsport/smil:omsport.stream.smil/chunklist.m3u8" type="application/x-mpegURL"/>
+</video>
