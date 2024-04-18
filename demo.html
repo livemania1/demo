@@ -26,11 +26,7 @@
           const video = document.getElementById('video');
           const ui = video['ui'];
           const controls = ui.getControls();
-          const player = controls.getPlayer();
-          const config = {
-               'controlPanelElements': ['play_pause','mute','spacer','time_and_duration','quality','fullscreen','picture_in_picture']
-          }
-          ui.configure(config);
+          const player = controls.getPlayer()
         
           window.player = player;
           window.ui = ui;
